@@ -817,8 +817,8 @@ class NME(BaseMetric):
                         'not have the item ``bboxes`` for expected ' \
                         'normalized_item ``"bbox_size"``.'
                     # ground truth bboxes, [1, 4]
-                    bbox_size = np.max(gt['bboxes'][0][2:] -
-                                       gt['bboxes'][0][:2])
+                    bbox_size = np.sqrt((gt['bboxes'][0][2]-gt['bboxes'][0][0]) *
+                                        (gt['bboxes'][0][3]-gt['bboxes'][0][1]))
                     result['bbox_size'] = np.array([bbox_size]).reshape(-1, 1)
                 else:
                     assert self.norm_item in gt, f'The ground truth data ' \

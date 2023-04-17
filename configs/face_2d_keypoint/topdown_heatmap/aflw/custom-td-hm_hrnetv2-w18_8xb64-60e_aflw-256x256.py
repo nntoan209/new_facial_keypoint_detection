@@ -1,7 +1,7 @@
 _base_ = ['../../../_base_/default_runtime.py']
 
 # runtime
-train_cfg = dict(max_epochs=60, val_interval=1)
+train_cfg = dict(max_epochs=50, val_interval=1)
 
 # optimizer
 optim_wrapper = dict(optimizer=dict(
@@ -17,21 +17,21 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=60,
-        milestones=[40, 55],
-        gamma=0.1,
+        end=50,
+        milestones=[10, 20, 30, 40],
+        gamma=0.4,
         by_epoch=True)
 ]
 
 # automatically scaling LR based on the actual training batch size
-auto_scale_lr = dict(base_batch_size=4)
+auto_scale_lr = dict(base_batch_size=16)
 
 # hooks
 default_hooks = dict(checkpoint=dict(save_best='NME', rule='less', interval=1))
 
 # codec settings
 codec = dict(
-    type='MSRAHeatmap', input_size=(256, 256), heatmap_size=(64, 64), sigma=2)
+    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=2)
 
 # model settings
 model = dict(
@@ -121,7 +121,7 @@ val_pipeline = [
 
 # data loaders
 train_dataloader = dict(
-    batch_size=4,
+    batch_size=16,
     num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -134,7 +134,7 @@ train_dataloader = dict(
         pipeline=train_pipeline,
     ))
 val_dataloader = dict(
-    batch_size=4,
+    batch_size=16,
     num_workers=2,
     persistent_workers=True,
     drop_last=False,

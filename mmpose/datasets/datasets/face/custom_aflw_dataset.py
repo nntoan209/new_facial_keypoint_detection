@@ -90,6 +90,7 @@ class CustomAFLWDataset(BaseCocoStyleDataset):
         # scale = np.array([[ann['scale'], ann['scale']]],
         #                  dtype=np.float32) * pixel_std
         # bbox = bbox_cs2xyxy(center, scale)
+        
         old_bbox = np.array([ann['bbox']])
         center, scale = bbox_xywh2cs(old_bbox)
         bbox = bbox_xywh2xyxy(old_bbox)
@@ -116,12 +117,14 @@ class CustomAFLWDataset(BaseCocoStyleDataset):
             'id': ann['id'],
         }
 
-        if self.test_mode:
-            # 'box_size' is used as normalization factor
-            # assert 'box_size' in ann, '"box_size" is missing in annotation, '\
-            #                           'which is required for evaluation.'
-            if not 'box_size' in ann:
-                ann['box_size'] = np.sqrt(old_bbox[0, 2] * old_bbox[0, 3])
-                data_info['box_size'] = ann['box_size']
+        # if self.test_mode:
+        #     # 'box_size' is used as normalization factor
+        #     # assert 'box_size' in ann, '"box_size" is missing in annotation, '\
+        #     #                           'which is required for evaluation.'
+        #     # data_info['box_size'] = ann['box_size']
+
+        #     if not 'bbox_size' in ann:
+        #         ann['bbox_size'] = np.sqrt(old_bbox[0, 2] * old_bbox[0, 3])
+        #         data_info['bbox_size'] = ann['bbox_size']
 
         return data_info
