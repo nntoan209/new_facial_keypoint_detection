@@ -19,7 +19,7 @@ param_scheduler = [
         begin=0,
         end=50,
         milestones=[10, 20, 30, 40],
-        gamma=0.5,
+        gamma=0.4,
         by_epoch=True)
 ]
 
