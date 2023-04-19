@@ -17,7 +17,7 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=60,
+        end=50,
         milestones=[10, 20, 30, 40],
         gamma=0.4,
         by_epoch=True)
