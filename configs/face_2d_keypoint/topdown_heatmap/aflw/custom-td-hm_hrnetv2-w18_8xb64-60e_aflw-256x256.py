@@ -1,7 +1,7 @@
 _base_ = ['../../../_base_/default_runtime.py']
 
 # runtime
-train_cfg = dict(max_epochs=50, val_interval=1)
+train_cfg = dict(max_epochs=60, val_interval=1)
 
 # optimizer
 optim_wrapper = dict(optimizer=dict(
@@ -17,9 +17,9 @@ param_scheduler = [
     dict(
         type='MultiStepLR',
         begin=0,
-        end=50,
-        milestones=[10, 20, 30, 40],
-        gamma=0.4,
+        end=60,
+        milestones=[10, 20, 30, 40, 50],
+        gamma=0.5,
         by_epoch=True)
 ]
 
@@ -31,7 +31,7 @@ default_hooks = dict(checkpoint=dict(save_best='NME', rule='less', interval=1))
 
 # codec settings
 codec = dict(
-    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=2)
+    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=3)
 
 # model settings
 model = dict(
@@ -85,7 +85,7 @@ model = dict(
         deconv_out_channels=None,
         conv_out_channels=(270, ),
         conv_kernel_sizes=(1, ),
-        loss=dict(type='FocalHeatmapLoss', use_target_weight=True),
+        loss=dict(type='AdaptiveWingLoss', use_target_weight=True),
         decoder=codec),
     test_cfg=dict(
         flip_test=True,
