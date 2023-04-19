@@ -19,7 +19,7 @@ param_scheduler = [
         begin=0,
         end=50,
         milestones=[10, 20, 30, 40],
-        gamma=0.5,
+        gamma=0.4,
         by_epoch=True)
 ]
 
@@ -31,7 +31,7 @@ default_hooks = dict(checkpoint=dict(save_best='NME', rule='less', interval=1))
 
 # codec settings
 codec = dict(
-    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=3)
+    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=2)
 
 # model settings
 model = dict(

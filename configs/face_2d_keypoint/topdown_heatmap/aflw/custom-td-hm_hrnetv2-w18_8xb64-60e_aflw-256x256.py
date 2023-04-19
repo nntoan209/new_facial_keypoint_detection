@@ -31,7 +31,7 @@ default_hooks = dict(checkpoint=dict(save_best='NME', rule='less', interval=1))
 
 # codec settings
 codec = dict(
-    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=3)
+    type='MSRAHeatmap', input_size=(512, 512), heatmap_size=(128, 128), sigma=2)
 
 # model settings
 model = dict(
@@ -85,7 +85,7 @@ model = dict(
         deconv_out_channels=None,
         conv_out_channels=(270, ),
         conv_kernel_sizes=(1, ),
-        loss=dict(type='AdaptiveWingLoss', use_target_weight=True),
+        loss=dict(type='FocalHeatmapLoss', use_target_weight=True),
         decoder=codec),
     test_cfg=dict(
         flip_test=True,
