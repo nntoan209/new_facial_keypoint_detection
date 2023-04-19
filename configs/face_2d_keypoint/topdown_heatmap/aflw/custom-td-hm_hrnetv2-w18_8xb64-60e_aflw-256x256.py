@@ -19,7 +19,7 @@ param_scheduler = [
         begin=0,
         end=50,
         milestones=[10, 20, 30, 40],
-        gamma=0.4,
+        gamma=0.5,
         by_epoch=True)
 ]
 
@@ -85,7 +85,7 @@ model = dict(
         deconv_out_channels=None,
         conv_out_channels=(270, ),
         conv_kernel_sizes=(1, ),
-        loss=dict(type='KeypointMSELoss', use_target_weight=True),
+        loss=dict(type='AdaptiveWingLoss', use_target_weight=True),
         decoder=codec),
     test_cfg=dict(
         flip_test=True,
