@@ -85,7 +85,7 @@ model = dict(
         deconv_out_channels=None,
         conv_out_channels=(270, ),
         conv_kernel_sizes=(1, ),
-        loss=dict(type='KeypointMSELoss', use_target_weight=True),
+        loss=dict(type='AdaptiveWingLoss', use_target_weight=True),
         decoder=codec),
     test_cfg=dict(
         flip_test=True,
