@@ -35,7 +35,7 @@ codec = dict(
     input_size=(256, 256),
     heatmap_size=(64, 64),
     sigma=2,
-    unbias=True)
+    unbiased=True)
 
 # model settings
 model = dict(
