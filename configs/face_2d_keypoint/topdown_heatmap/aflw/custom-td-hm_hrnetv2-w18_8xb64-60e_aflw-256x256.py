@@ -24,7 +24,7 @@ param_scheduler = [
 ]
 
 # automatically scaling LR based on the actual training batch size
-auto_scale_lr = dict(base_batch_size=32)
+auto_scale_lr = dict(base_batch_size=16)
 
 # hooks
 default_hooks = dict(checkpoint=dict(save_best='NME', rule='less', interval=1))
@@ -125,7 +125,7 @@ val_pipeline = [
 
 # data loaders
 train_dataloader = dict(
-    batch_size=32,
+    batch_size=16,
     num_workers=2,
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -138,7 +138,7 @@ train_dataloader = dict(
         pipeline=train_pipeline,
     ))
 val_dataloader = dict(
-    batch_size=32,
+    batch_size=16,
     num_workers=2,
     persistent_workers=True,
     drop_last=False,
